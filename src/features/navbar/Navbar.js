@@ -26,8 +26,8 @@ export default function Navbar() {
 
 
   return (
-    <div className='nav navbar bg-light text-center d-flex justify-content-space-between p-2' style= {{height: "100px"}}>
-        <div className='navbar-brand'>Brand</div>
+    <div className='nav navbar bg-light text-center d-flex justify-content-space-between p-4' style= {{height: "120px"}}>
+        <div className='navbar-brand'>BBC Posts</div>
         <div><h2>Posts Homepage</h2>
         </div>
         <div className='p-2'>
