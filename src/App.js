@@ -1,15 +1,20 @@
 import React from "react";
-import Controllers from "./features/posts/Controllers";
-import Posts from "./features/posts/Posts";
-import Navbar from "./features/navbar/Navbar";
+import Homepage from "./pages/Homepage";
+import {BrowserRouter, Routes , Route} from "react-router-dom";
+import Userpage from "./pages/Userpage";
+
+
 
 function App() {
   return (
-    <div>
-      <Navbar />
-      <Controllers />
-      <Posts />
-    </div>
+    <BrowserRouter>
+      <Routes>
+
+        <Route path="/"  element={<Homepage />} />
+        <Route path="/user/:userId" element={<Userpage />} />
+
+      </Routes>
+      </BrowserRouter>
   );
 }
 

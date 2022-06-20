@@ -13,10 +13,10 @@ export default function Controllers() {
         return dispatch(getPosts({query: `_limit=${amount}`}))
     }
 
-    const getPostsById = (userId) => {
+    // const getPostsById = (userId) => {
 
-      return dispatch(getPosts({query: `userId=${userId}`}))
-    }
+    //   return dispatch(getPosts({query: `userId=${userId}`}))
+    // }
 
 
 
@@ -27,7 +27,7 @@ export default function Controllers() {
             <div className='col-4'><button onClick={() => getPostsByAmount(8)} className='btn btn-warning btn-lg'>8 Post</button></div>
             <div className='col-4'><button onClick={() => getPostsByAmount(16)} className='btn btn-danger btn-lg'>16 Post</button></div>
         </div>
-        <div className='container mx-auto my-5 text-center'>
+        {/* <div className='container mx-auto my-5 text-center'>
         <div className='row'>
           <div className='col-2'><button onClick={() => getPostsById(1) } className='btn btn-secondary'>1</button></div>
           <div className='col-2'><button onClick={() => getPostsById(2) } className='btn btn-secondary'>2</button></div>
@@ -44,7 +44,7 @@ export default function Controllers() {
           <div className='col-2'><button onClick={() => getPostsById(9) } className='btn btn-secondary'>9</button></div>
           <div className='col-2'><button onClick={() => getPostsById(10) } className='btn btn-secondary'>10</button></div>
           </div>
-        </div>
+        </div> */}
         </div>
   )
 }

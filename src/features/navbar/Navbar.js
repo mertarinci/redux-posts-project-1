@@ -1,5 +1,5 @@
 import React from 'react';
-import { BouncingBalls, Coin, FadingBalls, FadingDots } from 'react-cssfx-loading/lib';
+import { BouncingBalls, Coin, FadingDots } from 'react-cssfx-loading/lib';
 import { useSelector } from 'react-redux';
 
 export default function Navbar() {
