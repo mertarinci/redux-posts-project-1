@@ -3,11 +3,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
 export const getPosts = createAsyncThunk("posts/getPosts", 
-    async ({limit}) => {
-        return await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`)
+    async ({query}) => {
+        return await fetch(`https://jsonplaceholder.typicode.com/posts?${query}`)
         .then((res) => res.json())
     }
 )
+
 
 
 const postsSlice = createSlice({
