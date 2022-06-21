@@ -13,8 +13,8 @@ export const getUsers = createAsyncThunk("users/getUsers",
 const userSlice = createSlice({
     name: "users",
     initialState: {
-        list: [],
-        status : null,
+        users: [],
+        loading : null,
         selectedUser : ""
     },
     extraReducers:{
@@ -22,7 +22,7 @@ const userSlice = createSlice({
             state.status = "loading"
         },
         [getUsers.fulfilled]: (state,action) => {
-            state.list = action.payload
+            state.users = action.payload
             state.status = "success"
         },
         [getUsers.rejected]: (state, action) => {

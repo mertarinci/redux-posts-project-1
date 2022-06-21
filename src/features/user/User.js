@@ -4,26 +4,27 @@ import { getUsers } from './userSlice';
 import { useParams, Link } from "react-router-dom";
 import { getPosts } from '../posts/postSlice';
 
-export default function User() {
+
+
+export default function User(props) {
   const dispatch = useDispatch();
   const params = useParams();
 
-
-  const user = useSelector(state => state.users.list);
-  const posts = useSelector(state => state.posts.list);
+  const { users } = useSelector(state => state.users);
+  const { posts} = useSelector(state => state.posts);
 
 
   useEffect(() => {
     dispatch(getUsers())
     dispatch(getPosts({ query: `userId=${params.userId}` }))
-  }, [dispatch])
+  }, [dispatch,params.userId])
 
 
 
   const publishUser = () => {
 
-    if (user[0]) {
-      return user[params.userId - 1]
+    if (users[0]) {
+      return users[params.userId - 1]
     } else {
       return delete publishUser[" "]
     }
@@ -39,7 +40,7 @@ export default function User() {
             <h5 className="card-title">{p.title}</h5>
             <h6 className="card-subtitle mb-2 text-muted">Post ID: {p.id}</h6>
             <p className="card-text">{p.body}</p>
-            <div class="card-footer">
+            <div className="card-footer">
               {publishUser().name}
             </div>
 
@@ -65,12 +66,12 @@ export default function User() {
   const leftSide = () => {
     return (
       <div className='col-4'>
-        <ul class="list-group p-2">
-          <li class="list-group-item active text-center">{publishUser().name}</li>
-          <li class="list-group-item">Username: {publishUser().username}</li>
-          <li class="list-group-item">Email: {publishUser().email}</li>
-          <li class="list-group-item">Phone: {publishUser().phone}</li>
-          <li class="list-group-item">Website: {publishUser().website}</li>
+        <ul className="list-group p-2">
+          <li className="list-group-item active text-center">{publishUser().name}</li>
+          <li className="list-group-item">Username: {publishUser().username}</li>
+          <li className="list-group-item">Email: {publishUser().email}</li>
+          <li className="list-group-item">Phone: {publishUser().phone}</li>
+          <li className="list-group-item">Website: {publishUser().website}</li>
         </ul>
       </div>
     )
@@ -87,16 +88,31 @@ export default function User() {
     )
   }
 
+ 
 
   return (
-    <div>{userNavBar()}
+    <div>
+      {userNavBar()}
       <div className='container'>
         <div className='row'>
           {leftSide()}
           {rightSide()}
         </div>
+
       </div>
-    </div>
+      </div>
+
+
+    // <div>
+    //    {
+
+    //     users.map(user => {
+    //       if (parseInt(user.id) === parseInt(params.userId)) {
+    //         return (<div key={user.id}>{user.name}</div>)
+    //       }
+    //     })
+    //   } 
+    // </div>
 
   )
 }

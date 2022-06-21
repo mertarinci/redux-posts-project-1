@@ -8,25 +8,32 @@ import { Link } from "react-router-dom";
 
 export default function Posts() {
 
-    const posts = useSelector(state => state.posts.list);
-    const users = useSelector(state => state.users.list);
+
 
 
     const dispatch = useDispatch();
 
 
+    const {posts} = useSelector(state => state.posts);
+    const {users} = useSelector(state => state.users);
+  
     useEffect(() => {
 
-        dispatch(getPosts({ limit: "" }))
+         dispatch(getPosts({ query: "" }))
+        
+         dispatch(getUsers())
+ 
+     }, [dispatch])
 
-        dispatch(getUsers())
 
-    }, [dispatch])
+     
+
+ 
+
+
 
 
     return (
-
-
         <div className='mt-5'>
             <div className='row'>
                 <div className='container col-3 text-center'>
@@ -56,7 +63,7 @@ export default function Posts() {
                                         <h6 className="card-subtitle mb-2 text-muted">Post Id: {post.id}</h6>
                                         <p className="card-text">{post.body}</p>
                                         <div className="card-footer text-muted text-center">
-                                            Author: {post.userId}
+                                            <Link to={`/posts/${post.id}`}><button className='btn btn-success'>Haberin detayları</button></Link>
                                         </div>
                                     </div>
                                 </div>
