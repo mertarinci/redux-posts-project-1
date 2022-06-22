@@ -54,11 +54,6 @@ export default function CreatePost() {
             })
 
 
-
-
-
-            
-
     }
 
     const showPreview = () => {
@@ -78,7 +73,6 @@ export default function CreatePost() {
             </div>)
         }
     }
-
 
     return (
 
