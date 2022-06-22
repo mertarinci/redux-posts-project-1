@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { getPosts } from './postSlice';
+import { Link } from 'react-router-dom';
 
 export default function Controllers() {
 
@@ -23,9 +24,10 @@ export default function Controllers() {
   return (
     <div className='container my-5 text-center'>
         <div className='row'>
-            <div className='col-4'><button onClick={() => getPostsByAmount(4)} className='btn btn-primary btn-lg'>4 Post</button></div>
-            <div className='col-4'><button onClick={() => getPostsByAmount(8)} className='btn btn-warning btn-lg'>8 Post</button></div>
-            <div className='col-4'><button onClick={() => getPostsByAmount(16)} className='btn btn-danger btn-lg'>16 Post</button></div>
+            <div className='col-3'><button onClick={() => getPostsByAmount(4)} className='btn btn-primary '>4 Post</button></div>
+            <div className='col-3'><button onClick={() => getPostsByAmount(8)} className='btn btn-warning '>8 Post</button></div>
+            <div className='col-3'><button onClick={() => getPostsByAmount(16)} className='btn btn-danger '>16 Post</button></div>
+            <div className='col-3'><Link to={"/posts/createPost"}><button className='btn btn-success'>Add New Post</button></Link></div>
         </div>
         {/* <div className='container mx-auto my-5 text-center'>
         <div className='row'>

@@ -1,0 +1,11 @@
+import React from 'react';
+import {Link} from "react-router-dom"
+export default function PleaseLogin() {
+  return (
+    <div className='text-center'>
+        <h1 style={{textAlign:"center", padding:"100px"}}>You have to login to acess this page.</h1>
+        <Link to={"/login"}><button className='btn btn-primary btn-lg '>Go to Login Page</button></Link>
+
+    </div>
+  )
+}
