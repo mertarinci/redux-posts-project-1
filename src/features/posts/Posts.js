@@ -19,7 +19,7 @@ export default function Posts() {
   
     useEffect(() => {
 
-         dispatch(getPosts({ query: "" }))
+         dispatch(getPosts())
         
          dispatch(getUsers())
  
@@ -54,16 +54,20 @@ export default function Posts() {
                 <div className='col-9'>
                     <div className='row'>
 
+                       
+
                         {posts.map(post => (
 
-                            <div key={post.id} className='col-3'>
+                            <div key={post._id} className='col-3'>
                                 <div  className="card" style={{ width: "18rem" }}>
-                                    <div className="card-body">
+                                <img style={{width:"286px",height:"285px"}} src={post.postImage} className="card-img-top" alt="images"/>
+                                    <div className="card-body text-center">
                                         <h5 className="card-title">{post.title}</h5>
-                                        <h6 className="card-subtitle mb-2 text-muted">Post Id: {post.id}</h6>
-                                        <p className="card-text">{post.body}</p>
+                                        <h6 className="card-subtitle mb-2 text-muted">Post Id: {post._id}</h6>
+                                        <hr></hr>
+                                        <p className="card-text">{post.content}</p>
                                         <div className="card-footer text-muted text-center">
-                                            <Link to={`/posts/${post.id}`}><button className='btn btn-success'>Haberin detayları</button></Link>
+                                            <Link to={`/posts/${post._id}`}><button className='btn btn-success'>Haberin detayları</button></Link>
                                         </div>
                                     </div>
                                 </div>

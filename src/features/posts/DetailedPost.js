@@ -3,33 +3,32 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from "axios";
 import { getUsers } from '../user/userSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function DetailedPost() {
 
-  const [post, setPost] = useState([]) // A B = []
+  const [post, setPost] = useState([])
 
   const params = useParams();
 
   const dispatch = useDispatch();
 
-  const { users } = useSelector(state => state.users);
 
-  const getPosts = async () => { await axios.get("https://jsonplaceholder.typicode.com/posts").then(res => setPost(res.data)) }
+  const getPosts = async () => { await axios.get("http://localhost:4000/api/posts/getAllPosts").then(res => setPost(res.data.data)) }
 
   useEffect(() => {
     getPosts();
     dispatch(getUsers())
   }, [dispatch])
 
-  const publishUser = () => {
+  // const publishUser = () => {
 
-    if (users[0]) {
-      return users[post[params.postId].userId - 1]
-    } else {
-      return delete publishUser[" "]
-    }
-  }
+  //   if (users[0]) {
+  //     return users[post[params.postId].userId - 1]
+  //   } else {
+  //     return delete publishUser[" "]
+  //   }
+  // }
 
 
 
@@ -41,24 +40,26 @@ export default function DetailedPost() {
       
 
       {post.map(p => {
-        if (parseInt(p.id) === parseInt(params.postId)) {
+        if (parseInt(p._id) === parseInt(params.postId)) {
           return (
             <div>
             <div className='nav navbar bg-light text-center d-flex justify-content-space-between p-4' style={{ height: "120px" }}>
               <Link to="/" style={{ textDecoration: 'none' }}><div className='navbar-brand' href="">BBC Posts</div></Link>
-              <div><h2>{p.id} - {p.title.toUpperCase()}</h2></div>
+              <div></div>
               <div></div>
             </div>
 
 
             <div className='mt-5 p-2 text-center container'>
-              <h4 className='text-center'>Author: {publishUser().name}</h4>
-              <img src='https://picsum.photos/800/400' alt='img'></img>
+              <img style={{width:"600px",height:"400px"}} src={p.postImage} alt='postImage'></img>
             </div>
-            <div className='container mt-5 text-cente'>
-              <h1 className='p-2'>{p.body}</h1>
+            <hr></hr>
+
+            <div className='container mt-5 text-center'>
+              <h1 className='p-2'>{p.title}</h1>
               <hr></hr>
-              <h3 className='p-2'>{p.body}</h3>
+
+              <h3 className='p-2 text-center'>{p.content}</h3>
             </div>
 
             </div>

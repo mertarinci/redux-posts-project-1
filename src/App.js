@@ -7,6 +7,7 @@ import PostDetail from "./pages/PostDetail";
 import CreatePost from "./pages/CreatePost";
 import PleaseLogin from "./pages/PleaseLogin";
 import LoginPage from "./pages/LoginPage";
+import Register from "./pages/RegisterPage";
 
 
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/posts/:postId" element= {<PostDetail />} />
         <Route path="/posts/createPost" element={createPostAuth()} />
         { !user && <Route path="/login" element={<LoginPage />}/>}
+        <Route path="/register" element={<Register />} />
         <Route path ="*" element={<NotFound />} ></Route>
 
 

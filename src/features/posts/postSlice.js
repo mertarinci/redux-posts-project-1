@@ -5,12 +5,12 @@ import axios from "axios";
 
 export const getPosts = createAsyncThunk("posts/getPosts", 
 
-    async ({query}) => {
+    async () => {
 
         try {
-            let url = `https://jsonplaceholder.typicode.com/posts?${query}`
+            let url = `http://localhost:4000/api/posts/getAllPosts`
             const response = await axios.get(url)
-            return response.data
+            return response.data.data
 
         }catch(err){
             console.log(err)
