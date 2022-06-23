@@ -14,7 +14,7 @@ function AllUsers() {
     useEffect(() => {
 
         async function fetchData() {
-            await axios.get("https://babacanpostbe.herokuapp.com/api/user/getAllUsers", {
+            await axios.get("http://localhost:4000/api/user/getAllUsers", {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -57,10 +57,13 @@ function AllUsers() {
     return (
         <div>
             <h1 className='errorMessage'></h1>
+{/* 
 
             {users.map(user => (
                             <li key={user.userId}>{user.username}</li>
-                        ))}
+                        ))} */}
+
+                        {renderUsers()}
 
 
 

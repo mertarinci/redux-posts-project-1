@@ -8,7 +8,7 @@ export const getPosts = createAsyncThunk("posts/getPosts",
     async () => {
 
         try {
-            let url = `https://babacanpostbe.herokuapp.com/api/posts/getAllPosts`
+            let url = `http://localhost:4000/api/posts/getAllPosts`
             const response = await axios.get(url)
             return response.data.data
 

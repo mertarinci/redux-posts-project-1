@@ -18,7 +18,7 @@ export default function Register() {
 
         e.preventDefault();
 
-        await axios.post("https://babacanpostbe.herokuapp.com/api/user/register", {
+        await axios.post("http://localhost:4000/api/user/register", {
             email:email,
             password:password,
             username:username

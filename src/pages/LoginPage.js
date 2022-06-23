@@ -16,7 +16,7 @@ export default function LoginPage() {
         e.preventDefault();
 
 
-        await axios.post("https://babacanpostbe.herokuapp.com/api/user/login", {
+        await axios.post("http://localhost:4000/api/user/login", {
             username:username,
             password:password
         })

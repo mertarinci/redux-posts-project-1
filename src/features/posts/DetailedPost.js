@@ -14,7 +14,7 @@ export default function DetailedPost() {
   const dispatch = useDispatch();
 
 
-  const getPosts = async () => { await axios.get("https://babacanpostbe.herokuapp.com/api/posts/getAllPosts").then(res => setPost(res.data.data)) }
+  const getPosts = async () => { await axios.get("http://localhost:4000/api/posts/getAllPosts").then(res => setPost(res.data.data)) }
 
   useEffect(() => {
     getPosts();
