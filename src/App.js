@@ -25,10 +25,9 @@ function App() {
     }
   }
 
-
-
   return (
     <BrowserRouter>
+
       <Routes>
 
                   {/* Exact Routes */}

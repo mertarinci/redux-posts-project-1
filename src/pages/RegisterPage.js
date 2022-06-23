@@ -18,8 +18,6 @@ export default function Register() {
 
         e.preventDefault();
 
-
-
         await axios.post("http://localhost:4000/api/user/register", {
             email:email,
             password:password,
@@ -54,8 +52,7 @@ export default function Register() {
                     html:`${err.response.data.message}`,
                     timer: 2000,
                     timerProgressBar: true})})
-                
-
+            
 
     }
 
