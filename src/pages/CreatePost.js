@@ -15,7 +15,7 @@ export default function CreatePost() {
 
 
 
-        await axios.post("http://localhost:4000/api/posts/newPost", {
+        await axios.post("https://babacanpostbe.herokuapp.com//api/posts/newPost", {
             title: title,
             content: content,
             postImage:postImage

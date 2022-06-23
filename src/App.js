@@ -8,6 +8,7 @@ import CreatePost from "./pages/CreatePost";
 import PleaseLogin from "./pages/PleaseLogin";
 import LoginPage from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
+import AllUsers from "./pages/AllUsers";
 
 
 
@@ -39,6 +40,7 @@ function App() {
         { !user && <Route path="/login" element={<LoginPage />}/>}
         <Route path="/register" element={<Register />} />
         <Route path ="*" element={<NotFound />} ></Route>
+        <Route path ="/allUsers" element={<AllUsers />} ></Route>
 
 
 

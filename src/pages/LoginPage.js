@@ -16,7 +16,7 @@ export default function LoginPage() {
         e.preventDefault();
 
 
-        await axios.post("http://localhost:4000/api/user/login", {
+        await axios.post("https://babacanpostbe.herokuapp.com/api/user/login", {
             username:username,
             password:password
         })
@@ -67,7 +67,7 @@ export default function LoginPage() {
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Password</label>
-                    <input onChange={(e)=> setPassword(e.target.value)} id='password' style={{width:"200px", margin:"auto"}} type="text" className="form-control" />
+                    <input onChange={(e)=> setPassword(e.target.value)} id='password' style={{width:"200px", margin:"auto"}} type="password" className="form-control" />
                 </div>
                 <div className="mb-3 form-check">
                 </div>
