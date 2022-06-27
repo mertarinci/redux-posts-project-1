@@ -16,6 +16,7 @@ export default function Posts() {
 
     const {posts} = useSelector(state => state.posts);
     const {users} = useSelector(state => state.users);
+    const {user} = useSelector(state => state.auth)
   
     useEffect(() => {
 
@@ -25,18 +26,13 @@ export default function Posts() {
  
      }, [dispatch])
 
-
-     
-
- 
-
-
-
-
     return (
         <div className='mt-5'>
             <div className='row'>
+
                 <div className='container col-3 text-center'>
+
+                {user ? ( <Link style={{marginRight:"115px"}} to={"/allUsers"}><button className='btn btn-warning p-2'>All Users</button></Link>): (<></>)}
                     <ul className="list-group" style={{ width: "300px", marginLeft: "20px", fontSize: "1.5rem" }}>
                         <h2 className='p-2'>Authors</h2>
                         {
@@ -51,14 +47,14 @@ export default function Posts() {
 
                     </ul>
                 </div>
-                <div className='col-9'>
+                <div className='col-lg-9'>
                     <div className='row'>
 
                        
 
                         {posts.map(post => (
 
-                            <div key={post._id} className='col-3'>
+                            <div key={post._id} className='col-lg-3'>
                                 <div  className="card" style={{ width: "18rem" }}>
                                 <img style={{width:"286px",height:"285px"}} src={post.postImage} className="card-img-top" alt="images"/>
                                     <div className="card-body text-center">

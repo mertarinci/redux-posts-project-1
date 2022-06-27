@@ -1,38 +1,34 @@
 import React from 'react';
-import { BouncingBalls, Coin, FadingDots } from 'react-cssfx-loading/lib';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import {logout,reset} from "../auth/authSlice"
 
 export default function Navbar() {
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-    const postStatus = useSelector(state => state.posts.status)
+    const  {user} = useSelector(state => state.auth)
 
 
-
-    const statusBar = () => {
-    if (postStatus ==="failed"){
-        return <FadingDots color="#FF0000" width="50px" height="50px" duration="2s" />
+    const onLogout = () => {
+        dispatch(logout())
+        dispatch(reset())
+        navigate("/")
     }
 
-    if(postStatus === "success"){
-        return <Coin color="#7CFC00" width="50px" height="50px" duration="2s" />
-    }
-
-    if(postStatus === "loading"){
-
-        return <BouncingBalls color="#0000CD" width="20px" height="20px" duration="2s" />
-    }
-    }
 
 
   return (
     <div className='nav navbar bg-light text-center d-flex justify-content-space-between p-4' style= {{height: "120px"}}>
+      
         <div className='navbar-brand'>BBC Posts</div>
         <div><h2>Posts Homepage</h2>
         </div>
-        <div className='p-2'>
-            {statusBar()}
-        </div>
+        <div>{user ? (<Link to={"/posts/createPost"}><button className='btn btn-success btn-lg'>Add New Post</button></Link>) : (<></>)}</div>
+        <div>
+            {user ? (<div>You are logged as : <span style={{fontWeight:"bold", paddingRight:"20px"}}>{user.data.username}</span> <button onClick={onLogout} className='btn btn-danger'> Logout</button></div>): (<Link to={"/login"}><button className='btn btn-primary btn-lg'>Login</button></Link>)}
+            </div>
     </div>
   )
 }

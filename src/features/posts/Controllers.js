@@ -18,9 +18,9 @@ export default function Controllers() {
             {/* <div className='col-3'><button onClick={() => getPostsByAmount(4)} className='btn btn-primary '>4 Post</button></div>
             <div className='col-3'><button onClick={() => getPostsByAmount(8)} className='btn btn-warning '>8 Post</button></div>
             <div className='col-3'><button onClick={() => getPostsByAmount(16)} className='btn btn-danger '>16 Post</button></div> */}
-            <div className='col-4'><Link to={"/posts/createPost"}><button className='btn btn-success btn-lg'>Add New Post</button></Link></div>
-            <div className='col-4'><Link to={"/register"}><button className='btn btn-warning btn-lg'>Register</button></Link></div>
-            <div className='col-4'><Link to={"/login"}><button className='btn btn-primary btn-lg'>Login</button></Link></div>
+            {/* <div className='col-4'><Link to={"/posts/createPost"}><button className='btn btn-success btn-lg'>Add New Post</button></Link></div> */}
+           
+            
         </div>
         {/* <div className='container mx-auto my-5 text-center'>
         <div className='row'>

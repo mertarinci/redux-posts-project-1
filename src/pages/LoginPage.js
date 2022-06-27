@@ -1,73 +1,84 @@
-import React, { useState } from 'react';
-import axios from "axios";
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import {useSelector,useDispatch} from "react-redux"
+import {login,reset} from "../features/auth/authSlice"
+
+
 
 export default function LoginPage() {
 
-   
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const [username,setUsername] = useState("")
-    const [password,setPassword] = useState("")
+    const [formData, setFormData] = useState({
+        username:"",
+        password:""
+    })
 
-    const handleSubmit = async (e) => {
+    const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth)
 
-        e.preventDefault();
+    const {username,password} = formData
 
+    useEffect(() => {
 
-        await axios.post("http://localhost:4000/api/user/login", {
-            username:username,
-            password:password
-        })
-            .then(async res => {if(res.status === 200){
+        if(isError){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: message,
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+        }
 
-                document.getElementById("username").value=""
-                document.getElementById("password").value=""
+        if(isSuccess || user){
 
-                await Swal.fire({
-                    icon: 'success',
-                    title: "Welcome back! You logged in.",
-                    html:"Congrats!",
-                    timer: 1000,
-                    timerProgressBar: true})
+            navigate("/")
+        }
 
-                localStorage.setItem("token",JSON.stringify(res.data.access_token));
+        dispatch(reset())
 
-                navigate("/");
-
-            
+    },[user,isError,isSuccess,message,navigate,dispatch])
 
 
-            }})
-            .catch(err => {
 
-                document.getElementById("errorMessage").innerHTML = `
-                ${err.response.data.message}
-                `
 
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Oups, there is a mistake!',
-                    html:`${err.response.data.message}`,
-                    timer: 2000,
-                    timerProgressBar: true})})
-            
+
+    const onChange = (e) => {
+        setFormData((prevState)=> ({
+            ...prevState,
+            [e.target.name]:e.target.value
+        }))
     }
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+
+        const userData = {
+            username,
+            password
+        }
+
+        dispatch(login(userData))
+
+    }
+
+
 
     return (
         <div className='text-center container' style={{marginTop:"120px"}}>
             <h1 className='mb-3'>BBC Posts</h1>
             <h2>Login Page</h2>
-            <form onSubmit={handleSubmit} className='text-center style mt-5'>
+            <form onSubmit={onSubmit} className='text-center style mt-5'>
                 <div className="mb-3">
                     <p id='errorMessage' className='bg-danger' style={{width:"300px", marginLeft:"500px", fontWeight:"bold", color:"white"}}></p>
                     <label className="form-label">Username</label>
-                    <input onChange={(e)=> setUsername(e.target.value)}  id='username' style={{width:"200px", margin:"auto"}} type="text" className="form-control" />
+                    <input name='username' onChange={onChange}  id='username' style={{width:"200px", margin:"auto"}} type="text" className="form-control" />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Password</label>
-                    <input onChange={(e)=> setPassword(e.target.value)} id='password' style={{width:"200px", margin:"auto"}} type="password" className="form-control" />
+                    <input name='password' onChange={onChange}   id='password' style={{width:"200px", margin:"auto"}} type="password" className="form-control" />
                 </div>
                 <div className="mb-3 form-check">
                 </div>

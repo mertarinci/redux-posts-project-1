@@ -15,7 +15,7 @@ import AllUsers from "./pages/AllUsers";
 
 function App() {
 
-  const user = localStorage.getItem("token")
+  const user = localStorage.getItem("user")
 
   const createPostAuth = () => {
 

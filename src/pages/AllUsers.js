@@ -1,29 +1,41 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 function AllUsers() {
 
     const [users, setUsers] = useState([]);
 
-    const token = JSON.parse(localStorage.getItem("token"))
+
+
+    const token = (JSON.parse(localStorage.getItem("user")))
 
 
 
     useEffect(() => {
 
+
+
         async function fetchData() {
-            await axios.get("http://localhost:4000/api/user/getAllUsers", {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            }).then(res => {
-                if (res.status === 200) {
-                    setUsers(res.data.data)
-                }
-            }).catch(err =>
-                document.querySelector(".errorMessage").innerHTML = `${err.response.data.message}`)
+
+            if(token){
+
+                await axios.get("http://localhost:4000/api/user/getAllUsers", {
+                    headers: {
+                        "Authorization": `Bearer ${token.access_token}`
+                    }}).then(res => {
+                    if (res.status === 200) {
+                        setUsers(res.data.data)
+                    }
+                }).catch(err =>
+                    document.querySelector(".errorMessage").innerHTML = `${err.response.data.message}`)
+
+            }else{
+                document.querySelector(".errorMessage").innerHTML = `You have to login.`
+            }
+
 
         }
         fetchData();
@@ -56,6 +68,7 @@ function AllUsers() {
 
     return (
         <div>
+        <Link to={"/"}> <button className='btn btn-primary'>Back to Homepage</button></Link>
             <h1 className='errorMessage'></h1>
 {/* 
 

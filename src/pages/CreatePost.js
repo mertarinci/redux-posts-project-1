@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom';
 
 export default function CreatePost() {
 
@@ -78,8 +79,9 @@ export default function CreatePost() {
 
 
         <div className='container text-center' style={{ marginTop: "150px" }}>
+            <Link to={"/"}> <button className='btn btn-primary'>Back to Homepage</button></Link>
+
             <div id='postSuccess' className='mb-5'></div>
-            
 
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
