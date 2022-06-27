@@ -4,8 +4,17 @@ import axios from "axios";
 
 
 export const getUsers = createAsyncThunk("users/getUsers", 
-    async () => {
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/users`)
+    async ({query}) => {
+        const response = await axios.get(`http://localhost:4000/api/user/getAllUsers${query}`)
+
+        // if(response.data.pagination.next){
+        //     console.log("ye")
+        // }else{
+        //     console.log("no")
+        // }
+        // console.log((response.data.pagination.next))
+
+
         return response.data})
 
 
@@ -15,14 +24,17 @@ const userSlice = createSlice({
     initialState: {
         users: [],
         loading : null,
-        selectedUser : ""
+        status: "idle",
+        selectedUser : "",
+        count:""
     },
     extraReducers:{
         [getUsers.pending]: (state, action) => {
             state.status = "loading"
         },
         [getUsers.fulfilled]: (state,action) => {
-            state.users = action.payload
+            state.count = action.payload.totalCount
+            state.users = action.payload.data
             state.status = "success"
         },
         [getUsers.rejected]: (state, action) => {

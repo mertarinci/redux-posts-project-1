@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUsers } from '../user/userSlice';
 import { getPosts } from './postSlice';
@@ -16,15 +16,22 @@ export default function Posts() {
 
     const {posts} = useSelector(state => state.posts);
     const {users} = useSelector(state => state.users);
-    const {user} = useSelector(state => state.auth)
+    const {user} = useSelector(state => state.auth);
+    const count = useSelector(state => state.users.count)
+
+    const [query, setQuery] = useState("")
   
     useEffect(() => {
 
          dispatch(getPosts())
         
-         dispatch(getUsers())
+         dispatch(getUsers({query: query ? `${query}`: "?limit=5" }))
+
  
-     }, [dispatch])
+    }, [dispatch, query])
+
+
+
 
     return (
         <div className='mt-5'>
@@ -37,15 +44,29 @@ export default function Posts() {
                         <h2 className='p-2'>Authors</h2>
                         {
                             users.map((user) => (
-                                <Link key={user.id} style={{ textDecoration: 'none' }} to={`/user/${user.id}`}>
-                                    <li onMouseOver={(e) => e.target.classList.add("bg-info")} onMouseLeave={(e) => e.target.classList.remove("bg-info")} className="list-group-item">{user.name}</li>
+                                <Link key={user.userId} style={{ textDecoration: 'none' }} to={`/user/${user.username}`}>
+                                    <li onMouseOver={(e) => e.target.classList.add("bg-info")} onMouseLeave={(e) => e.target.classList.remove("bg-info")} className="list-group-item">{user.username}</li>
                                 </Link>
-
-
                             ))
                         }
 
                     </ul>
+
+
+
+                    <button className='btn btn-primary' onClick={() => setQuery("?page=1&limit=5")}>1</button>
+                    <button className='btn btn-primary' onClick={() => setQuery("?page=2&limit=5")}>2</button>
+                    <button className='btn btn-primary' onClick={() => setQuery("?page=3&limit=5")}>3</button>
+                    <button className='btn btn-primary' onClick={() => setQuery("?page=4&limit=5")}>4</button>
+
+
+
+
+                    
+                    <p >Total Pages: {Math.ceil(count / 5)}</p>
+
+                    
+
                 </div>
                 <div className='col-lg-9'>
                     <div className='row'>

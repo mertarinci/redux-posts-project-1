@@ -34,7 +34,7 @@ function App() {
                   {/* Exact Routes */}
 
         <Route path="/" exact element={<Homepage />} />
-        <Route path="/user/:userId" element={<Userpage />} />
+        <Route path="/user/:username" element={<Userpage />} />
         <Route path="/posts/:postId" element= {<PostDetail />} />
         <Route path="/posts/createPost" element={createPostAuth()} />
         { !user && <Route path="/login" element={<LoginPage />}/>}
