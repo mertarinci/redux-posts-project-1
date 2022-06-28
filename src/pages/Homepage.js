@@ -2,6 +2,7 @@ import React from 'react'
 import Controllers from "../features/posts/Controllers";
 import Posts from "../features/posts/Posts";
 import Navbar from "../features/navbar/Navbar";
+import Authors from '../features/user/Authors';
 
 
 export default function Homepage() {
@@ -10,7 +11,11 @@ export default function Homepage() {
 
             <Navbar />
             <Controllers />
-            <Posts />
+
+            <div className='row'>
+            <div className='col-3'><Authors/></div>
+            <div className='col-9'><Posts /></div>
+            </div>
 
         </div>
     )
