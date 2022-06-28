@@ -9,6 +9,13 @@ export default function CreatePost() {
     const [content, setContent] = useState("");
     const [postImage,setImage] = useState("");
 
+    // const token = (JSON.parse(localStorage.getItem("user")))
+
+
+    const [token,setToken] = useState((JSON.parse(localStorage.getItem("user"))))
+
+    
+
 
     const handleSubmit = async (e) => {
 
@@ -20,8 +27,12 @@ export default function CreatePost() {
             title: title,
             content: content,
             postImage:postImage
-        })
+        }, {headers: {
+            "Authorization": `Bearer ${token.access_token}`
+        }})
             .then(res => {if(res.status === 200){
+
+
 
                 document.getElementById("title").value=""
                 document.getElementById("content").value=""
@@ -29,9 +40,6 @@ export default function CreatePost() {
                 document.getElementById("postSuccess").innerHTML = `
                 <h2><span style="color: green;" >Post sent successfully.</span> You can return to <span style="color: red;"><a href="/">Homepage.</a></span></h2>
                 `
-
-
-                
 
                 Swal.fire({
                     icon: 'success',
@@ -95,7 +103,7 @@ export default function CreatePost() {
                 <div className="mb-3">
                     <label className="form-label">Image (URL Only)</label>
                     <input onChange={(e) => setImage(e.target.value)} type="text" className="form-control" id="image" />
-                    <div id="imageHelp" class="form-text">**If you added a valid URL, your picture will be shown down below.</div>
+                    <div id="imageHelp" className="form-text">**If you added a valid URL, your picture will be shown down below.</div>
 
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>

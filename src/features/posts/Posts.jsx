@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUsers } from '../user/userSlice';
 import { getPosts } from './postSlice';
@@ -19,18 +19,25 @@ export default function Posts() {
     const {user} = useSelector(state => state.auth);
     const count = useSelector(state => state.users.count)
 
-    const [query, setQuery] = useState("")
+    const [query, setQuery] = useState("5")
+
+
+
   
     useEffect(() => {
 
          dispatch(getPosts())
         
-         dispatch(getUsers({query: query ? `${query}`: "?limit=5" }))
+        //  dispatch(getUsers({query: query ? `${query}`: "?limit=5" }))
+         dispatch(getUsers({query:`?limit=${query}`}))
+
+
+
+         
+
 
  
     }, [dispatch, query])
-
-
 
 
     return (
@@ -53,25 +60,23 @@ export default function Posts() {
                     </ul>
 
 
-
-                    <button className='btn btn-primary' onClick={() => setQuery("?page=1&limit=5")}>1</button>
-                    <button className='btn btn-primary' onClick={() => setQuery("?page=2&limit=5")}>2</button>
-                    <button className='btn btn-primary' onClick={() => setQuery("?page=3&limit=5")}>3</button>
-                    <button className='btn btn-primary' onClick={() => setQuery("?page=4&limit=5")}>4</button>
-
-
-
-
                     
-                    <p >Total Pages: {Math.ceil(count / 5)}</p>
-
+                    {<div style={{marginRight:"100px",marginTop:"30px"}}> <button className='btn btn-primary' onClick={() => setQuery("5&page=1")}>1</button>
+                    <button className='btn btn-primary' onClick={() => setQuery("5&page=2")}>2</button>
+                    <button className='btn btn-primary' onClick={() => setQuery("5&page=3")}>3</button>
+                    <button className='btn btn-primary' onClick={() => setQuery("5&page=4")}>4</button>
+                    <p >Total Pages: {Math.ceil(count / 5)}</p> </div>}
+      
                     
+                    
+
+  
 
                 </div>
                 <div className='col-lg-9'>
                     <div className='row'>
 
-                       
+                       {console.log(users)}
 
                         {posts.map(post => (
 
@@ -83,6 +88,7 @@ export default function Posts() {
                                         <h6 className="card-subtitle mb-2 text-muted">Post Id: {post._id}</h6>
                                         <hr></hr>
                                         <p className="card-text">{post.content}</p>
+                                        
                                         <div className="card-footer text-muted text-center">
                                             <Link to={`/posts/${post._id}`}><button className='btn btn-success'>Haberin detayları</button></Link>
                                         </div>
