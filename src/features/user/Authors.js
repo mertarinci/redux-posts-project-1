@@ -13,25 +13,33 @@ function Authors() {
     const count = useSelector(state => state.users.count);
 
 
-    const [query, setQuery] = useState("5")
+    const [query, setQuery] = useState({
+        limit:8,
+        page:1
+    })
+
+    const {limit} = query
+
+
+
 
 
     useEffect(() => {
-        dispatch(getUsers({query:`?limit=${query}`}))
+        dispatch(getUsers({query:`?limit=${query.limit}&page=${query.page}`}))
         dispatch(getAllUsers())
 
    }, [dispatch, query])
 
 
-   const arrCount = Math.ceil(count/5)
+   const arrCount = Math.ceil(count/query.limit)
    const arr = [...Array(arrCount).keys()]
+
 
 
 
   return (
     <div className='text-center'>
-
-    {user ? ( <Link style={{marginRight:"115px"}} to={"/allUsers"}><button className='btn btn-warning p-2'>All Users</button></Link>): (<></>)}
+            {user ? ( <Link style={{marginRight:"115px"}} to={"/allUsers"}><button className='btn btn-warning p-2'>All Users</button></Link>): (<></>)}
         <ul className="list-group" style={{ width: "300px", marginLeft: "20px", fontSize: "1.5rem" }}>
             <h2 className='p-2'>Authors</h2>
             {
@@ -46,12 +54,14 @@ function Authors() {
 
         <div style={{marginRight:"100px",marginTop:"30px"}}>
         {arr.map(b => (
-            <button onClick={() => setQuery("5&page="+(b+1))} key={b} className='btn btn-primary'>{b+1}</button>
+            <button onClick={() => setQuery({page:b+1,limit})} key={b} className='btn btn-primary m-1'>{b+1}</button>
         ))}
-        <p >Total Pages: {Math.ceil(count / 5)}</p>
+        <p >Total Pages: {Math.ceil(count / query.limit)}</p>
         </div>
 
     </div>
+
+
   )
 }
 

@@ -9,15 +9,20 @@ import PleaseLogin from "./pages/PleaseLogin";
 import LoginPage from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import AllUsers from "./pages/AllUsers";
+import ResetPassword from "./pages/ResetPassword";
+
 
 
 
 
 function App() {
 
+
   const user = localStorage.getItem("user")
 
   const createPostAuth = () => {
+
+
 
     if (user) {
       return <CreatePost />
@@ -27,6 +32,7 @@ function App() {
   }
 
   return (
+    
     <BrowserRouter>
 
       <Routes>
@@ -41,8 +47,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path ="*" element={<NotFound />} ></Route>
         <Route path ="/allUsers" element={<AllUsers />} ></Route>
-
-
+        <Route path="/resetPassword" element={<ResetPassword/>} />
+        
 
                 {/* Replacement Routes */}
 

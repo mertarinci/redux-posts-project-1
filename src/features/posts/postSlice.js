@@ -22,19 +22,19 @@ const postsSlice = createSlice({
     name: "posts",
     initialState: {
         posts: [],
-        status : "idle"
+        postStatus : "idle"
     },
     extraReducers(builder){
         builder
         .addCase(getPosts.pending, (state,action)=> {
-            state.status = "loading"
+            state.postStatus = "loading"
         })
         .addCase(getPosts.fulfilled, (state,action)=> {
-            state.status = "success"
+            state.postStatus = "success"
             state.posts = action.payload
         })
         .addCase(getPosts.rejected, (state,action)=> {
-            state.status = "failed"
+            state.postStatus = "failed"
         })
         
     }
