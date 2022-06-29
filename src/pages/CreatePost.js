@@ -14,9 +14,6 @@ export default function CreatePost() {
 
     const [token,setToken] = useState((JSON.parse(localStorage.getItem("user"))))
 
-    
-
-
     const handleSubmit = async (e) => {
 
         e.preventDefault();
