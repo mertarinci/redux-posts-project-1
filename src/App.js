@@ -10,9 +10,9 @@ import LoginPage from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import AllUsers from "./pages/AllUsers";
 import ResetPassword from "./pages/ResetPassword";
-import { useSelector } from "react-redux";
 import PrivateRoutes from "./features/context/PrivateRoute";
-import { useCookies } from "react-cookie";
+import TestPage from "./pages/TestPage";
+import Chat from "./features/chat/Chat"
 
 
 
@@ -39,6 +39,8 @@ function App() {
         <Route path="/" exact element={<Homepage />} />
         <Route path="user/:username" element={<Userpage />} />
         <Route path="posts/:postId" element= {<PostDetail />} />
+        <Route path="testPage" element={<TestPage /> }/>
+        <Route path="chat" element={<Chat />} />
 
 
 

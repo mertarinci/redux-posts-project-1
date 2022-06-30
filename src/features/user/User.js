@@ -48,7 +48,7 @@ export default function User(props) {
   const userPage = function () {
 
      if (status === "success" && postStatus === "success") {
-       const user = users.filter(user => user.username === params.username)[0]
+       const user = users?.filter(user => user.username === params.username)[0]
       return (
         <div>
 
@@ -72,7 +72,7 @@ export default function User(props) {
             </div>
             <div className='col-9'>
               <div className='row'>
-                {posts.map(post => {
+                {posts?.map(post => {
                   if (post.user === user.userId) {
                     return (
 

@@ -9,11 +9,7 @@ const PrivateRoutes = (props) => {
   const  loggedUser  = useSelector(state => state.auth.user);
   const userRole = loggedUser?.data.role
 
-
-   
-
   
-        
   return(
     loggedUser && (userRole === props.userRole || userRole === "admin") ? <Outlet/> :  props.userRole ==="user" ? <PleaseLogin /> : <Unauthorized />
 )
