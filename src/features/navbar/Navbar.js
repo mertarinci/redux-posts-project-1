@@ -27,12 +27,11 @@ export default function Navbar() {
         </div>
         
         <div>
-            
 
-            
+        <div>{user?.data.role === "admin" ? ("Welcome back my precious admin!") : (<></>)}</div>
             
             {user ? 
-            (<div> <Link style={{marginRight:"20px"}} to={"/posts/createPost"}><button className='btn btn-success btn-lg'>Add New Post</button></Link> You are logged as : <span style={{fontWeight:"bold", paddingRight:"20px"}}>{user.data.username}</span> <button onClick={onLogout} className='btn btn-danger'> Logout</button></div>): (<Link to={"/login"}><button className='btn btn-primary btn-lg'>Login</button></Link>)}
+            (<div> <Link style={{marginRight:"20px"}} to={"/posts/createPost"}><button className='btn btn-success btn-lg'>Add New Post</button></Link> You are logged as : <span style={{fontWeight:"bold", paddingRight:"20px"}}>{user.data.username}</span> <button onClick={onLogout} className='btn btn-danger'> Logout</button></div>): (<div><Link to={"/login"}><button className='btn btn-primary btn-lg'>Login</button></Link> <Link to={"/register"}><button className='btn btn-success btn-lg'>Register</button></Link></div> )}
             </div>
     </div>
   )

@@ -10,6 +10,10 @@ import LoginPage from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import AllUsers from "./pages/AllUsers";
 import ResetPassword from "./pages/ResetPassword";
+import { useSelector } from "react-redux";
+import PrivateRoutes from "./features/context/PrivateRoute";
+import { useCookies } from "react-cookie";
+
 
 
 
@@ -20,16 +24,9 @@ function App() {
 
   const user = localStorage.getItem("user")
 
-  const createPostAuth = () => {
 
+  
 
-
-    if (user) {
-      return <CreatePost />
-    }else{
-      return <PleaseLogin />
-    }
-  }
 
   return (
     
@@ -40,19 +37,45 @@ function App() {
                   {/* Exact Routes */}
 
         <Route path="/" exact element={<Homepage />} />
-        <Route path="/user/:username" element={<Userpage />} />
-        <Route path="/posts/:postId" element= {<PostDetail />} />
-        <Route path="/posts/createPost" element={createPostAuth()} />
-        { !user && <Route path="/login" element={<LoginPage />}/>}
-        <Route path="/register" element={<Register />} />
-        <Route path ="*" element={<NotFound />} ></Route>
-        <Route path ="/allUsers" element={<AllUsers />} ></Route>
-        <Route path="/resetPassword" element={<ResetPassword/>} />
+        <Route path="user/:username" element={<Userpage />} />
+        <Route path="posts/:postId" element= {<PostDetail />} />
+
+
+
+        {/* Protected Routes */}
+
+        <Route path="/"  element={<PrivateRoutes userRole = "user"/>}>
+
+        <Route path="posts/createPost" element={<CreatePost/>} />
+
+        </Route>
+
+        
+        <Route path="/"  element={<PrivateRoutes userRole = "admin"/>}>
+
+        <Route path ="allUsers" element={<AllUsers />} />
+
+        </Route>
+
         
 
-                {/* Replacement Routes */}
 
-        {<Route path="/login" element={<Navigate replace to="/" />} />}
+
+
+                {/* Replacement Routes */}
+        {!user && <Route path="login" element={<LoginPage />}/>}
+        {<Route path="login" element={<Navigate replace to="/" />} />}
+        {!user && <Route path="register" element={<Register />} />}
+        {<Route path="register" element={<Navigate replace to="/" />} />}
+        {!user && <Route path="resetPassword" element={<ResetPassword/>} />}
+        {<Route path="resetPassword" element={<Navigate replace to="/" />} />}
+
+
+
+
+        <Route path ="*" element={<NotFound />} ></Route>
+
+
 
 
       </Routes>

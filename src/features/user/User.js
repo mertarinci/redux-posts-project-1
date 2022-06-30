@@ -14,7 +14,8 @@ export default function User(props) {
   const params = useParams();
 
   const { users } = useSelector(state => state.users);
-  const { posts } = useSelector(state => state.posts)
+  const { posts } = useSelector(state => state.posts);
+  const  loggedUser  = useSelector(state => state.auth.user);
 
   const status = useSelector(state => state.users.status)
   const postStatus = useSelector(state => state.users.status)
@@ -23,23 +24,35 @@ export default function User(props) {
   useEffect(() => {
     dispatch(getUsers({ query: "" }))
     dispatch(getPosts())
+    
   }, [dispatch, params.username])
 
 
 
 
-  // if(users.loading === "success"){
-  //   user = users.filter(user => user.username === params.username)[0]
+  // const isOwner = () => {
+  //     if(loggedUser.data.username === params.username){
+  //       return true
+  //      }else{
+  //       return false
+  //      }
   // }
+
+
+  const ownerPost = loggedUser?.data.username === params.username ? true:false
+
+
 
 
 
   const userPage = function () {
 
-    if (status === "success" && postStatus === "success") {
-      const user = users.filter(user => user.username === params.username)[0]
+     if (status === "success" && postStatus === "success") {
+       const user = users.filter(user => user.username === params.username)[0]
       return (
         <div>
+
+          
           <div className='nav navbar bg-light text-center d-flex justify-content-space-between p-4' style={{ height: "120px" }}>
             <Link to="/" style={{ textDecoration: 'none' }}><div className='navbar-brand' href="">BBC Posts</div></Link>
             <div><h2>{user.username}'s Posts</h2></div>
@@ -77,7 +90,11 @@ export default function User(props) {
                               readMoreText="Devamını Oku" /></div>
                             <p>Author:{user.username} </p>
                             <div className="card-footer text-muted text-center">
-                              <Link to={`/posts/${post._id}`}><button className='btn btn-success'>Haberin detayları</button></Link>
+                              <Link to={`/posts/${post._id}`}><button className='btn btn-success'>Haberin detayları</button></Link> 
+                                {ownerPost ? (<div id='postButtons'><button  id='deletePost' className='btn btn-danger'>Delete Post</button>
+                              <button  id='editPost' className='btn btn-warning'>Edit Post</button></div>):(<></>)}
+
+
                             </div>
                           </div>
                         </div>
@@ -98,9 +115,10 @@ export default function User(props) {
 
 
 
+
+
   return (
     <div>
-
       {userPage()}
 
     </div>
