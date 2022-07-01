@@ -20,13 +20,19 @@ const login  = async (userData) => {
 
     if(response.data){
         localStorage.setItem("user",JSON.stringify(response.data))
+
     }
 
     return response.data
 }
 
-const logout = () => {
+const logout = async(userData) => {
+    const response = await axios.post("http://localhost:4000/api/user/logout",userData, {withCredentials:true})
+
     localStorage.removeItem("user")
+
+
+    console.log(response)
 }
 
 

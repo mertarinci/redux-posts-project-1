@@ -40,7 +40,6 @@ function App() {
         <Route path="user/:username" element={<Userpage />} />
         <Route path="posts/:postId" element= {<PostDetail />} />
         <Route path="testPage" element={<TestPage /> }/>
-        <Route path="chat" element={<Chat />} />
 
 
 
@@ -49,6 +48,8 @@ function App() {
         <Route path="/"  element={<PrivateRoutes userRole = "user"/>}>
 
         <Route path="posts/createPost" element={<CreatePost/>} />
+
+        <Route path="chat" element={<Chat />} />
 
         </Route>
 

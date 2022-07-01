@@ -28,12 +28,11 @@ function Authors() {
         dispatch(getUsers({query:`?limit=${query.limit}&page=${query.page}`}))
         dispatch(getAllUsers())
 
-   }, [dispatch, query])
+   }, [dispatch, query,users])
 
 
    const arrCount = Math.ceil(count/query.limit)
    const arr = [...Array(arrCount).keys()]
-
 
 
 
@@ -45,7 +44,7 @@ function Authors() {
             {
                 users.map((user) => (
                     <Link key={user.userId} style={{ textDecoration: 'none' }} to={`/user/${user.username}`}>
-                        <li onMouseOver={(e) => e.target.classList.add("bg-info")} onMouseLeave={(e) => e.target.classList.remove("bg-info")} className="list-group-item">{user.username}</li>
+                         {user.isOnline ? (<li style={{color:"green"}} onMouseOver={(e) => e.target.classList.add("bg-info")} onMouseLeave={(e) => e.target.classList.remove("bg-info")} className="list-group-item">{user.username}</li>):(<li style={{color:"red"}} onMouseOver={(e) => e.target.classList.add("bg-info")} onMouseLeave={(e) => e.target.classList.remove("bg-info")} className="list-group-item">{user.username}</li>)}
                     </Link>
                 ))
             }

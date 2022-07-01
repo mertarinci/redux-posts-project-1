@@ -2,11 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 
 function AllUsers() {
 
     const [users, setUsers] = useState([]);
+
 
 
 
@@ -39,7 +42,9 @@ function AllUsers() {
 
         }
         fetchData();
-    }, [token])
+    }, [])
+
+    console.log(users)
 
     const renderUsers = () => {
 
@@ -49,7 +54,7 @@ function AllUsers() {
                 <div>
                     <h3>List of Users</h3>
                     <ul>
-                        {users.map(user => (
+                        {users?.map(user => (
                             <li key={user.userId}>{user.username}</li>
                         ))}
                     </ul>

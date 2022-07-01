@@ -18,7 +18,7 @@ export default function LoginPage() {
         password:""
     })
 
-    const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth)
+    const {user, isError, isSuccess, message} = useSelector((state) => state.auth)
 
     const {username,password} = formData
 
@@ -59,7 +59,8 @@ export default function LoginPage() {
 
         const userData = {
             username,
-            password
+            password,
+            isOnline: true
         }
 
         dispatch(login(userData))
