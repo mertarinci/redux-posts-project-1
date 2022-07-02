@@ -50,6 +50,16 @@ function Chat() {
     }, [dispatch,message,messages])
 
 
+    const clearChat = async () => {
+
+        await axios.delete("http://localhost:4000/api/admin/clearChat",{
+            headers: {
+              "Authorization": `Bearer ${token}`
+            }
+          })
+    }
+
+
     const sendMessage = async (e) => {
 
 
@@ -101,6 +111,7 @@ function Chat() {
                 </ul>
 
                 <Link to={"/"}><button className='btn btn-primary btn-lg'>Homepage</button></Link>
+                {user.data.role === "admin" ? (<button onClick={() => clearChat()} className='btn btn-danger btn-lg'>Clear Chat</button>):(<></>)}
 
                 
             </div>

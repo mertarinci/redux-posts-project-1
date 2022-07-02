@@ -5,7 +5,6 @@ import Userpage from "./pages/Userpage";
 import NotFound from "./pages/NotFound";
 import PostDetail from "./pages/PostDetail";
 import CreatePost from "./pages/CreatePost";
-import PleaseLogin from "./pages/PleaseLogin";
 import LoginPage from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import AllUsers from "./pages/AllUsers";
@@ -23,9 +22,6 @@ function App() {
 
 
   const user = localStorage.getItem("user")
-
-
-  
 
 
   return (

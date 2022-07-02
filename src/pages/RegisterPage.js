@@ -147,7 +147,7 @@ export default function Register() {
                 </div>
                 <div className="mb-3 form-check">
                 </div>
-                <button type="submit" className="btn btn-primary">Login</button>
+                <button type="submit" className="btn btn-primary">Register</button>
             </form>
 
         </div>
