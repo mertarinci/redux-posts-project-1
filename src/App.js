@@ -12,6 +12,8 @@ import ResetPassword from "./pages/ResetPassword";
 import PrivateRoutes from "./features/context/PrivateRoute";
 import TestPage from "./pages/TestPage";
 import Chat from "./features/chat/Chat"
+import NewLoginPage from "./pages/NewLoginPage"
+import AdminPage from "./features/admin/AdminPage";
 
 
 
@@ -36,6 +38,7 @@ function App() {
         <Route path="user/:username" element={<Userpage />} />
         <Route path="posts/:postId" element= {<PostDetail />} />
         <Route path="testPage" element={<TestPage /> }/>
+        
 
 
 
@@ -54,6 +57,8 @@ function App() {
 
         <Route path ="allUsers" element={<AllUsers />} />
 
+        <Route path = "admin" element={<AdminPage />} />
+
         </Route>
 
         
@@ -62,7 +67,7 @@ function App() {
 
 
                 {/* Replacement Routes */}
-        {!user && <Route path="login" element={<LoginPage />}/>}
+        {!user && <Route path="login" element={<NewLoginPage />}/>}
         {<Route path="login" element={<Navigate replace to="/" />} />}
         {!user && <Route path="register" element={<Register />} />}
         {<Route path="register" element={<Navigate replace to="/" />} />}
