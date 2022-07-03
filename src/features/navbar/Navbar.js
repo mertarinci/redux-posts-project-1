@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import {logout,reset} from "../auth/authSlice"
+import { Avatar } from '@mui/material';
 
 export default function Navbar() {
 
