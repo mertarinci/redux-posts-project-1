@@ -18,10 +18,12 @@ export default function Register() {
     const [formData, setFormData] = useState({
         username:"",
         email:"",
-        password:""
+        password:"",
+        firstName:"",
+        lastName:""
     })
 
-    const {username,email,password} = formData
+    const {username,email,password,firstName,lastName} = formData
 
     const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth)
 
@@ -60,7 +62,9 @@ export default function Register() {
         const userData = {
             username,
             email,
-            password
+            password,
+            lastName,
+            firstName
         }
 
         dispatch(register(userData))
@@ -70,68 +74,22 @@ export default function Register() {
 
 
 
-
-
-    
-
-    // const nav = useNavigate();
-
-
-    // const [email,setEmail] = useState("")
-    // const [password,setPassword] = useState("")
-    // const [username,setUsername] = useState("")
-
-
-    // const handleSubmit = async (e) => {
-
-    //     e.preventDefault();
-
-    //     await axios.post("http://localhost:4000/api/user/register", {
-    //         email:email,
-    //         password:password,
-    //         username:username
-    //     }).then(async res => {if(res.status === 200){
-
-    //             document.getElementById("username").value=""
-    //             document.getElementById("email").value=""
-    //             document.getElementById("password").value=""
-
-    //             await Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Register sent successfully!',
-    //                 html:"Congrats!",
-    //                 timer: 2000,
-    //                 timerProgressBar: true})
-
-    //             nav("/")
-
-                
-
-    //         }})
-    //         .catch(err => {
-
-    //             document.getElementById("errorMessage").innerHTML = `
-    //             ${err.response.data.message}
-    //             `
-
-    //             Swal.fire({
-    //                 icon: 'warning',
-    //                 title: 'Oups, there is a mistake!',
-    //                 html:`${err.response.data.message}`,
-    //                 timer: 2000,
-    //                 timerProgressBar: true})})
-            
-
-    // }
-
-
-
     return (
         <div className='text-center container' style={{marginTop:"120px"}}>
             <Link to={"/"}><h1 className='mb-3'>BBC Posts</h1></Link>
             <h2>Register Page</h2>
 
             <form onSubmit={onSubmit} className='text-center style mt-5'>
+            <div className="mb-3">
+                    <p id='errorMessage' className='bg-danger' style={{width:"500px", marginLeft:"380px", fontWeight:"bold", color:"white"}}></p>
+                    <label className="form-label">First Name</label>
+                    <input name='firstName' id='firstName' onChange={onChange} style={{width:"200px", margin:"auto"}} type="text" className="form-control" />
+                </div>
+                <div className="mb-3">
+                    <p id='errorMessage' className='bg-danger' style={{width:"500px", marginLeft:"380px", fontWeight:"bold", color:"white"}}></p>
+                    <label className="form-label">Last Name</label>
+                    <input name='lastName' id='lastName' onChange={onChange} style={{width:"200px", margin:"auto"}} type="text" className="form-control" />
+                </div>
                 <div className="mb-3">
                     <p id='errorMessage' className='bg-danger' style={{width:"500px", marginLeft:"380px", fontWeight:"bold", color:"white"}}></p>
                     <label className="form-label">Email</label>
